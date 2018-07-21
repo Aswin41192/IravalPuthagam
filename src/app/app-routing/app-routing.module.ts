@@ -65,8 +65,8 @@ resolve:{
   imports: [
     CommonModule,
     RouterModule.forRoot(routes,{
-      onSameUrlNavigation:'reload'
-    })
+      useHash:true
+        })
   ],
   exports:[RouterModule],
   declarations: [],
