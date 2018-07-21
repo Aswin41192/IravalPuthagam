@@ -1,0 +1,14 @@
+.searchComponent{
+    margin:10px 30px 5px 5px;
+    width: 500px;
+}
+
+.languageDD{
+    margin:10px 20px 0px 0px;
+    width: 95%
+}
+
+.font{
+    color: maroon;
+    font-weight: bold;
+}

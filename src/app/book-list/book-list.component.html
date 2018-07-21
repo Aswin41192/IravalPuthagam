@@ -1,0 +1,72 @@
+<div>
+  
+<div class="row">
+  <div class="col-md-4" *ngFor="let book of books">
+    <div class="media" style="margin:10px">
+      <div class="media-left">
+        <a (click)="selectedBook(book)" class="hover" data-toggle="modal" data-target="#myModal">
+          <img [src]="book.path" (click)="selectedBook(book.name)"
+           class="media-object" style="width:100px;height:120px;">
+           </a>
+      </div>
+      <div class="media-body">
+            <h4 class="media-heading"><b>{{book.name}}</b></h4>
+        <p>by <a [routerLink]="['/author',book.author]" class="hover">{{book.author}}</a></p>
+        <p class="font">Rs. {{book.price}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="books.length==0">
+  <img src="https://media.giphy.com/media/4T5CeMioBfPh6AvC59/giphy.gif"  style="width:320px;height:300px;margin:5px 5px 5px 500px;" >
+</div>
+<div class="container">
+
+  <!-- The Modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body" style="height:300px">
+          <div class="media" style="margin:10px">
+            <div class="media-left">
+              <img [src]="book?.path" (click)="selectedBook(book.name)" class="media-object" style="width:100px;height:120px;">
+            </div>
+            <div class="media-body">
+             
+                <h4 class="media-heading"><b>{{book?.name}}</b></h4>
+              
+              <p>by {{book?.author}}</p>
+              <p class="font">Rs. {{book?.price}}</p>
+              <p><button class="btn btn-success" data-dismiss="modal"
+                *ngIf="!hideBtn"
+                (click)="addToCart(book)">Add to Cart</button></p>
+                <p><button class="btn btn-danger"
+                  *ngIf="hideBtn" data-dismiss="modal"
+                  (click)="removeFromCart(book)">Remove from Cart</button></p>
+            </div>
+          </div>
+          <hr style="border-color: gray">
+          <div>
+            <h4>Product Description </h4>
+            Product Condition: No Defects. 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<ngx-spinner
+bdColor = "rgba(51, 51, 51, 0.8)"
+size = "large"
+color = "#fff"
+type = "ball-clip-rotate"
+></ngx-spinner>

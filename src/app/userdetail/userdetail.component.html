@@ -1,0 +1,75 @@
+<div class="container">
+  <form novalidate [formGroup]="userForm" (ngSubmit)="updateBookAvailablity()" >
+    <fieldset class="from-group">
+      <legend>Delivery Details:</legend>
+    <div class="form-group">
+        <label>Name</label>
+        <input type="text" formControlName="name" class="form-control">
+          </div>
+  
+      <div  *ngIf="(name.dirty || name.touched) && name.invalid">
+          <p><font color="red"><b>Name is required!</b> </font></p>
+        </div> 
+      <div class="form-group">
+      <div>
+        <label>Email</label>
+        <input type="text" formControlName="email"  class="form-control" required>
+      </div>
+    </div>
+    <div  *ngIf="(email.dirty || email.touched) && email.invalid">
+        <p *ngIf="email.errors.required"><font color="red"><b>Email in required!</b> </font></p>
+        <p *ngIf="email.errors.email"><font color="red"><b>Email should contain @</b> </font></p>
+
+      </div> 
+    <div class="form-group">
+      <div>
+        <label>Address</label>
+        <textarea formControlName="address" class="form-control"></textarea>
+      </div>
+    </div>
+    <div *ngIf="(address.dirty || address.touched) && address.invalid">
+      <p><font color="red"><b>Address in required!</b> </font></p>
+    </div>
+    <div class="form-group">
+      <div>
+        <label>Phone</label>
+        <input type="text" formControlName="phone" class="form-control">
+      </div>
+    </div>
+    <div *ngIf="(phone.touched || phone.dirty) && phone.invalid">
+       <p *ngIf="phone.errors.required"><font color="red"><b>Phone in required!</b> </font></p>
+    </div>
+    <button class="btn btn-primary" [disabled]="!userForm.valid" data-toggle="modal" data-target="#confirmation">Submit</button>
+  </fieldset>
+  </form>
+</div>
+
+
+<div class="modal" id="confirmation">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body" style="height:150px">
+          <div class="media" style="margin:10px">
+  
+            <div class="media-body">
+                <b>
+                Your Order has been placed! Our executive will contact you shortly.
+                Thank you.
+                </b>
+                <div class="container" style="margin:20px 20px 20px 200px">
+                <button type="button" (click)="submitData()" class="btn btn-primary" data-dismiss="modal">Ok</button>
+              </div>
+            </div>
+          </div>
+        
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,30 @@
+<div class="container">
+<div class="panel-header">
+  <h3>Cart</h3>
+  <hr>
+  <b *ngIf="price >0">Total Price : Rs. {{price}}</b>
+</div>
+
+<div class="row">
+  <div class="col-md-4" *ngFor="let book of selectedItems">
+    <div class="media" style="margin:10px">
+      <div class="media-left">
+        <img [src]="book.path" class="media-object" style="width:100px;height:120px;">
+      </div>
+      <div class="media-body">
+          <p class="media-heading"><b>{{book.name}}</b></p>
+        <p>by {{book.author}}</p>
+        <p class="font">Rs. {{book.price}}</p>
+        <p><button class="btn btn-danger" (click)="removeFromCart(book)">Remove</button></p>
+      </div>
+    </div>
+  </div>
+</div>
+<div [hidden]="selectedItems.length==0">
+  <button style="margin:5px 5px 5px 500px;" (click)="checkout()" class="btn btn-success">Proceed to check out</button>
+</div>
+<div *ngIf="selectedItems.length==0">
+  <img src="https://media.giphy.com/media/4T5CeMioBfPh6AvC59/giphy.gif"  style="width:320px;height:300px;margin:5px 5px 5px 500px;" >
+</div>
+
+</div>
