@@ -1,5 +1,5 @@
 <div class="container">
-  <form novalidate [formGroup]="userForm" (ngSubmit)="updateBookAvailablity()" >
+  <form novalidate [formGroup]="userForm" (ngSubmit)="submitData(userForm.value)" >
     <fieldset class="from-group">
       <legend>Delivery Details:</legend>
     <div class="form-group">
@@ -64,7 +64,7 @@
                 Thank you.
                 </b>
                 <div class="container" style="margin:20px 20px 20px 200px">
-                <button type="button" (click)="submitData()" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                <button type="button" (click)="navigateToHome()" class="btn btn-primary" data-dismiss="modal">Ok</button>
               </div>
             </div>
           </div>

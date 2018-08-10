@@ -12,9 +12,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./book-list.component.css']
 })
 export class BookListComponent implements OnInit, OnDestroy {
-  response: Book[]=[];
-  mySubscription: any;
-  
+  response: Book[]=[];  
   @Input() books: Book[];
   booksInCart: Book[] = [];
   book: Book;
@@ -22,12 +20,7 @@ export class BookListComponent implements OnInit, OnDestroy {
   constructor(private bookSVC: BookService, private route: ActivatedRoute, private router: Router,
     private msgService: MessageService,private dts:DataTransferService,
     private spinner: NgxSpinnerService) {
-    this.mySubscription = this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.books = this.route.snapshot.data['books'].json();
-        console.log('Response:' + this.books);
-      }
-    });
+    
   }
 
   selectedBook(book) {
@@ -37,14 +30,14 @@ export class BookListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void { 
-    console.log('Set already:'+this.books)
-    this.books = this.route.snapshot.data['books'].json();
-    this.books=this.books.filter(book=>book.available==true);
+    if(this.route.snapshot.data['books']){
+     this.books=this.route.snapshot.data['books'].json();
+     console.log(this.books);
+  }
   }
 
   ngOnDestroy(): void {
-    if (this.mySubscription)
-      this.mySubscription.unsubscribe();
+    
   }
 
   addToCart(book: Book) {

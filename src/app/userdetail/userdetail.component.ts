@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { BookService } from '../service/http/book-service.service';
 import { DataTransferService } from '../service/utility/data-transfer.service';
 import { Subscription } from 'rxjs';
+import { PurchasedItems } from '../model/purchased-items';
 
 @Component({
   selector: 'app-userdetail',
@@ -44,24 +45,24 @@ export class UserDetailComponent implements OnInit,OnDestroy {
     })
   }
 
-  submitData(){
-    console.log('Inside Submit data')
+  submitData(form){
+   
+    let purchasedItems={
+     'items': this.dts.getSelectedItems(),
+     'userDetails':form
+    }
+    this.subscription=this.bookSVC.createOrder(purchasedItems).subscribe(message=>{
+      console.log(message);
+      if(message && message.json()==1){
+        this.msgService.setMessage(this.emptyCart);
+      }else{
+        window.alert("Error occured !");
+      }
+    });
+  }
+
+  navigateToHome(){
     this.msgService.setMessage(this.emptyCart);
     this.router.navigate(['']);
   }
-
-  updateBookAvailablity(){
-    console.log('The sekected Items are:'+JSON.stringify(this.dts.getSelectedItems()));
-    this.selectedItems=this.dts.getSelectedItems();
-    this.selectedItems.map(item=>{
-      item.available=false;
-      return item;
-    }).
-    forEach(book=>{
-      this.subscription=  this.bookSVC.updateAvailability(book).subscribe(/*msg=>{
-        console.log("Book Updated!!:"+msg)
-      }*/);
-    })
-  }
-
 }

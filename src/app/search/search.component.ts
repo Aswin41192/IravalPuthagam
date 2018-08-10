@@ -22,26 +22,14 @@ export class SearchComponent implements OnInit,OnDestroy {
     this.subscription=this.route.events.subscribe(event=>{
       if(event instanceof NavigationEnd){
         this.searchString=this.router.snapshot.params['searchString'];
-        this.response=this.router.snapshot.data['searchResults'].json();
-        this.populateResults(this.response);
+        this.searchResults=this.router.snapshot.data['searchResults'].json();
       }
     })
    }
 
   ngOnInit() {
     this.searchString=this.router.snapshot.params['searchString'];
-   this.response=this.router.snapshot.data['searchResults'].json();
-   this.populateResults(this.response);
-  }
-
-
-  private populateResults(results) {
-    this.searchResults=[];
-    results.map(result => {
-      if ((result['name'].includes(this.searchString) || result['author'].includes(this.searchString))
-      && result['available']) {
-        this.searchResults.push(result);
-      }
-    });
+   this.searchResults=this.router.snapshot.data['searchResults'].json();
+   //this.populateResults(this.response);
   }
 }

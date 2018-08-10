@@ -10,14 +10,13 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./author-component.component.css']
 })
 export class AuthorComponent implements OnInit{
-
-
   booksByAuthor:Book[]=[];
   
   constructor(private router:ActivatedRoute,private bookSVC:BookService) { }
 
   ngOnInit() {
     this.booksByAuthor= this.router.snapshot.data['author'].json();
+    console.log(this.booksByAuthor)
   }
 
 }

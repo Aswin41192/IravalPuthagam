@@ -32,9 +32,7 @@ export class AppComponent implements OnInit,OnDestroy{
       this.selectedItems= message['msg'].length;
      })
   this.mySubscription = this.router.events.subscribe((event) => {
-       console.log(event)
       if (event instanceof NavigationEnd || event instanceof NavigationCancel) {
-           console.log('Event occured')
            console.log(this.el.nativeElement.value);
            this.spinner.hide();
       }

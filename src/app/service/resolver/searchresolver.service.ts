@@ -10,10 +10,8 @@ export class SearchResolverService implements Resolve<any> {
   constructor(private bookSVC:BookService) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    console.log('INside Search Resolver')
-    console.log(route.params)
-
-      return this.bookSVC.getBooks();
+    let criteria=route.params['searchString'];
+    return this.bookSVC.search(criteria);
   }
   
 }
